@@ -21,7 +21,8 @@ export default class Registration extends Component{
             RegistrationPassword:'',
             register: false,
             error: false,
-            registerError: null,
+            registerError: '',
+            fieldError:{}
         };
 
         this.onTextboxChangeRegistrationUsername = this.onTextboxChangeRegistrationUsername.bind(this);
@@ -65,6 +66,12 @@ export default class Registration extends Component{
            isLoading: true,
         });
 
+        this.setState({
+            registerError: '',
+            fieldError:{}
+        })
+      
+
         const data = {
             email:RegistrationEmail,
             username: RegistrationUsername,
@@ -105,27 +112,32 @@ export default class Registration extends Component{
             register: true,
             error: false,
             isLoading:false,
-            registerError: null,
+            registerError:'',
+            fieldError:{}
         });
         }
         catch(err) {
-            if (err.response) {
-                if (err.response) {
-                    console.log(err.response.data)
-                  this.setState({
+            console.log(err.response.data)
+            if (err.response && err.response.data) {
+                if(err.response.data.errors){
+                    this.setState({
+                        error: true,
+                        register: false,
+                        isLoading:false,
+                        fieldError:err.response.data.errors
+                    });
+                }
+                else if(err.response.data.msg){
+                    this.setState({
                     error: true,
                     register: false,
                     isLoading:false,
-                    fieldErrors: err.message
-                  });
-                } else {
-                  this.setState({
-                    registerError: err.message
-                  });
-                }
-              } else {
-                console.log(err);
-              }
+                    registerError: err.response.data.msg,
+                });
+
+
+        }
+        }
     }
         
     };
@@ -141,6 +153,7 @@ export default class Registration extends Component{
           RegistrationUsername,
           RegistrationEmail,
           RegistrationPassword,
+          fieldError
         } = this.state;
 
         if (isLoading) {
@@ -149,6 +162,13 @@ export default class Registration extends Component{
 
         return(
             <div className="Registration">
+                <div className="status">
+                    {' '}
+                    {error && <Error message={ERROR_IN_REGISTRATION} />}
+                    {' '}
+                    {register && <Message message={REGISTRATION_MESSAGE} />}
+                    {' '}
+                </div>
                 <div>
                     <input
                     type="username"
@@ -162,24 +182,26 @@ export default class Registration extends Component{
                     value={RegistrationEmail}
                     onChange={this.onTextboxChangeRegistrationEmail}
                     /><br />
+                    {fieldError.email && (
+                    <div >{fieldError.email}</div>
+                    )}
                     <input
                     type="password"
                     placeholder="Password"
                     value={RegistrationPassword}
                     onChange={this.onTextboxChangeRegistrationPassword}
                     /><br />
+                    {fieldError.password && (
+                    <div >{fieldError.password}</div>
+                    )}
                     <button onClick={this.onSignUp}>Sign Up</button>
                 </div>
                 {' '}
-                {registerError && (
-                    <div>
-                    {registerError}
-                    </div>
-                )}
-                {' '}
-                {error && <Error message={ERROR_IN_REGISTRATION} />}
-                {' '}
-                {register && <Message message={REGISTRATION_MESSAGE} />}
+                {registerError && 
+                    (<div>
+                        {registerError}
+                    </div>) 
+                }
                 {' '}
             </div>
 
