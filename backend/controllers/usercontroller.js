@@ -5,11 +5,13 @@ const jwt = require('jsonwebtoken')
 
 const register = async (req,res,next) => {
     const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({
-                errors: errors.array()
-            });
-        }
+    if (!errors.isEmpty()) {
+      const err = {};
+      errors.array().forEach(error => {
+        err[error.param] = error.msg;
+      });
+      return res.status(422).json({ errors: err });
+    }
     const {
         username,
         email,
@@ -17,8 +19,7 @@ const register = async (req,res,next) => {
     } = req.body;
 try {
     let user = await User.findOne({
-        email,
-        username,
+      email
     });
     if (user) {
         return res.status(400).json({
