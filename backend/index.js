@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
+app.use(express.static(__dirname + '/'));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -21,13 +22,13 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.json({ message: "API Working" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "API Working" });
+// });
 
 app.listen(PORT, (req, res) => {
   console.log(`Server Started at PORT ${PORT}`);
 });
 
 app.use(cors());
-app.use("/", user);
+app.use("/users/", user);
