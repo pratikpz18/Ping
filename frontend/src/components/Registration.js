@@ -142,70 +142,97 @@ export default class Registration extends Component{
         
     };
 
-    render() {
+    
+        render() {
 
-        const {
-          isLoading,
-          token,
-          register,
-          error,
-          registerError,
-          RegistrationUsername,
-          RegistrationEmail,
-          RegistrationPassword,
-          fieldError
-        } = this.state;
+            const {
+            isLoading,
+            token,
+            register,
+            error,
+            registerError,
+            RegistrationUsername,
+            RegistrationEmail,
+            RegistrationPassword,
+            fieldError
+            } = this.state;
 
-        if (isLoading) {
-            return (<div><p>Loading...</p></div>);
-        }
+            if (isLoading) {
+                return (<div><p>Loading...</p></div>);
+            }
+            
+            if (!token) {
+                return(
+                    <div className="Registration">
+                        {' '}
+                        <div className="status">
+                            {' '}
+                            {error && <Error message={ERROR_IN_REGISTRATION} />}
+                            {' '}
+                            {register && <Message message={REGISTRATION_MESSAGE} />}
+                            {' '}
+                        </div>
+                        {' '}
+                        <div>
+                            <h1>REGISTER</h1>
+                        </div>
+                        {' '}
+                        <div>
+                            <input
+                            type="username"
+                            placeholder="Username"
+                            autoComplete="Username"
+                            value={RegistrationUsername}
+                            onChange={this.onTextboxChangeRegistrationUsername}
+                            /><br />
+                            <input
+                            type="email"
+                            placeholder="Email"
+                            autoComplete="Email"
+                            value={RegistrationEmail}
+                            onChange={this.onTextboxChangeRegistrationEmail}
+                            /><br />
+                            {' '}
+                            {fieldError.email && (
+                            <div >{fieldError.email}</div>
+                            )}
+                            {' '}
+                            <input
+                            type="password"
+                            placeholder="Password"
+                            value={RegistrationPassword}
+                            autoComplete="password"
+                            onChange={this.onTextboxChangeRegistrationPassword}
+                            /><br />
+                            {' '}
+                            {fieldError.password && (
+                            <div >{fieldError.password}</div>
+                            )}
+                            {' '}
+                            {' '}
+                            <div>
+                                <button onClick={this.onSignUp}>Sign Up</button>
+                                {' '}
+                                <Link to="/login"> Login </Link>
+                            </div>
+                            {' '}
+                        </div>{' '}
+                        {' '}
+                        {registerError && 
+                            (<div>
+                                {registerError}
+                            </div>) 
+                        }
+                        {' '}
+                    </div>
+                );
+            }
 
-        return(
-            <div className="Registration">
-                <div className="status">
-                    {' '}
-                    {error && <Error message={ERROR_IN_REGISTRATION} />}
-                    {' '}
-                    {register && <Message message={REGISTRATION_MESSAGE} />}
-                    {' '}
-                </div>
+            return (
                 <div>
-                    <input
-                    type="username"
-                    placeholder="Username"
-                    value={RegistrationUsername}
-                    onChange={this.onTextboxChangeRegistrationUsername}
-                    /><br />
-                    <input
-                    type="email"
-                    placeholder="Email"
-                    value={RegistrationEmail}
-                    onChange={this.onTextboxChangeRegistrationEmail}
-                    /><br />
-                    {fieldError.email && (
-                    <div >{fieldError.email}</div>
-                    )}
-                    <input
-                    type="password"
-                    placeholder="Password"
-                    value={RegistrationPassword}
-                    onChange={this.onTextboxChangeRegistrationPassword}
-                    /><br />
-                    {fieldError.password && (
-                    <div >{fieldError.password}</div>
-                    )}
-                    <button onClick={this.onSignUp}>Sign Up</button>
+                  <p>Signed in</p>
                 </div>
-                {' '}
-                {registerError && 
-                    (<div>
-                        {registerError}
-                    </div>) 
-                }
-                {' '}
-            </div>
-
-        );
-    }
+              );
+        }
 
 };
