@@ -44,7 +44,7 @@ try {
             id: user.id
         }
     };
-
+    req.session.userid=user.id;
     jwt.sign(
         payload,
         "randomString", {
@@ -77,23 +77,27 @@ const login = async (req,res,next)=>{
       let user = await User.findOne({
         email
       });
-      if (!user)
+      if (!user){
+        req.session.userid=null;
         return res.status(400).json({
           message: "User Not Exist"
         });
+      }
 
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch)
+      if (!isMatch){
+        req.session.userid=null;
         return res.status(400).json({
           message: "Incorrect Password !"
         });
+      }
 
       const payload = {
         user: {
           id: user.id
         }
       };
-
+      req.session.userid=user.id;
       jwt.sign(
         payload,
         "randomString",
