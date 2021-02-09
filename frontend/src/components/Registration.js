@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { UserRegistration } from '../services/RegistrationService';
-import axios from 'axios';
 import Message from '../elements/Message';
 import Error from '../elements/Error';
 import {
@@ -117,7 +116,7 @@ export default class Registration extends Component{
         });
         }
         catch(err) {
-            console.log(err.response.data)
+            console.log(err.response.data.errors)
             if (err.response && err.response.data) {
                 if(err.response.data.errors){
                     this.setState({
