@@ -33,27 +33,23 @@ router.post('/login',[
 router.get("/dashboard", auth, async (req, res) => {
     try {
       // request.user is getting fetched from Middleware after token authentication
-      if (req.session.user){
         const user = await User.findById(req.user.id);
         res.json(user);
-      }else{
-        res.send({ message: "Error in Fetching user" });
-      }
     } catch (e) {
       res.send({ message: "Error in Fetching user" });
     }
   });
 
-router.get('/logout', (req, res) => {
-    req.session.destroy(function(err){  
-      if(err){  
-          console.log(err);  
-      }  
-      else  
-      {  
-          res.redirect('/users');  
-      }  
-  });
-});  
+// router.get('/logout', (req, res) => {
+//     req.session.destroy(function(err){  
+//       if(err){  
+//           console.log(err);  
+//       }  
+//       else  
+//       {  
+//           res.redirect('/users/login');  
+//       }  
+//   });
+// });  
 
 module.exports = router
