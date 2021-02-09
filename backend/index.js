@@ -23,11 +23,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(session({
-  secret: 'Secreyyyy',
-  resave: true,
-  saveUninitialized: true
-}))
+// app.use(session({
+//   secret: 'Secreyyyy',
+//   resave: false,
+//   saveUninitialized: true
+// }))
 
 // app.get("/", (req, res) => {
 //   res.json({ message: "API Working" });
