@@ -66,11 +66,12 @@ try {
 
 const login = async (req,res,next)=>{
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array()
+      const err = {};
+      errors.array().forEach(error => {
+        err[error.param] = error.msg;
       });
+      return res.status(422).json({ errors: err });
     }
     const { email, password } = req.body;
     try {
@@ -78,7 +79,7 @@ const login = async (req,res,next)=>{
         email
       });
       if (!user){
-        req.session.userid=null;
+        // req.session.userid=null;
         return res.status(400).json({
           message: "User Not Exist"
         });
@@ -86,9 +87,9 @@ const login = async (req,res,next)=>{
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch){
-        req.session.userid=null;
+        // req.session.userid=null;
         return res.status(400).json({
-          message: "Incorrect Password !"
+          errors:{ password:"Incorrect Password !" }
         });
       }
 
@@ -97,7 +98,7 @@ const login = async (req,res,next)=>{
           id: user.id
         }
       };
-      req.session.userid=user.id;
+      req.session.user=user;
       jwt.sign(
         payload,
         "randomString",
@@ -108,8 +109,11 @@ const login = async (req,res,next)=>{
           if (err) throw err;
           res.status(200).json({
             message:"logged in succesfully",
+            user,
             token
           });
+          // console.log(req.session.user) //not using session
+          res.render("dashboard");
         }
       );
     } catch (e) {
