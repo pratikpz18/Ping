@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import { UserLogin } from '../services/LoginService';
 import Message from '../elements/Message';
 import Error from '../elements/Error';
@@ -34,6 +34,12 @@ export default class Login extends Component{
           isLoading: false
         });
     };
+
+    componentWillUnmount() {
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
 
     onTextboxChangeLoginEmail(event) {
         this.setState({
@@ -71,19 +77,25 @@ export default class Login extends Component{
             const LoginStatus =await UserLogin (data);
             // if (registerStatus.status === 200) {
             console.log(LoginStatus);
+            if (LoginStatus.data.token) {
+                localStorage.setItem("user", JSON.stringify(LoginStatus.data));
+            }
+            // if(LoginStatus){
+            //     return <Redirect to="/dashboard" />
+            // }
             this.setState ({
-                isLoading : true,
+                isLoading : false,
                 token:'',
                 LoginEmail:'',
                 LoginPassword:'',
-                login: false,
+                login: true,
                 error: false,
                 LoginError: '',
                 fieldError:{}
             });
         }
         catch(err){
-            console.log(err.response.data)
+            console.log(err.response.data.errors)
             if (err.response && err.response.data) {
                 if(err.response.data.errors){
                     this.setState({
@@ -99,7 +111,7 @@ export default class Login extends Component{
                     login: false,
                     isLoading:false,
                     LoginError: err.response.data.msg,
-                });
+                }); 
             }
         }
 
@@ -169,6 +181,10 @@ export default class Login extends Component{
                         <button onClick={this.onSignIn}>Sign In</button>
                         {' '}
                         <Link to="/register"> Register </Link>
+                    </div>
+                    {' '}
+                    <div>
+                        {!login ? <div>{LoginError}</div> : <Redirect  to='/dashboard' />}
                     </div>
                     {' '}
                 </div>
