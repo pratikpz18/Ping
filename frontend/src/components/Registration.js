@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import { UserRegistration } from '../services/RegistrationService';
 import Message from '../elements/Message';
 import Error from '../elements/Error';
@@ -215,6 +215,8 @@ export default class Registration extends Component{
                                 {' '}
                                 <Link to="/login"> Login </Link>
                             </div>
+                            {' '}
+                            {!register ? <div>{registerError}</div> : <Redirect  to='/login' />}
                             {' '}
                         </div>{' '}
                         {' '}
