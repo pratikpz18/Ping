@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
+import UserService from "../services/userservice";
 
-export default class Registration extends Component{
+
+export default class Landing extends Component{
+
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            currentUser: UserService.getCurrentUser(),
+            isLoading:false
+        };
+    }
+
     render(){
-        return(
-            <div>
-                <h1>Landing</h1>
-                {' '}
+
+        const { currentUser ,isLoading } = this.state;
+
+        if (isLoading) {
+            return (<div><p>Loading...</p></div>);
+        }
+
+        if(currentUser){
+            return(
+                <Redirect  to='/dashboard' />
+            )
+        }
+        else{
+            return(
                 <div>
-                    <Link to="/register">Register</Link>{' '}
-                    <Link to="/login" > Log In </Link>
+                    <h1>Landing</h1>
+                    {' '}
+                    <div>
+                        <Link to="/register">Register</Link>{' '}
+                        <Link to="/login" > Log In </Link>
+                    </div>
+                    {' '}
                 </div>
-                {' '}
-            </div>
-        );
+            );
+        }
     }
 }
