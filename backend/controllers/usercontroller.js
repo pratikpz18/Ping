@@ -44,7 +44,7 @@ try {
             id: user.id
         }
     };
-    req.session.userid=user.id;
+
     jwt.sign(
         payload,
         "randomString", {
@@ -98,7 +98,6 @@ const login = async (req,res,next)=>{
           id: user.id
         }
       };
-      req.session.user=user;
       jwt.sign(
         payload,
         "randomString",
