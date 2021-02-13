@@ -1,2 +1,2 @@
-# Z-INSTA
+# Ping
 /backend
