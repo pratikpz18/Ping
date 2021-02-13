@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import UserService from "../services/userservice";
 
 export default class Registration extends Component{
@@ -31,12 +31,7 @@ export default class Registration extends Component{
         if(!currentUser){
             return(
                 <div>
-                    <div>
-                        <h1>You Need to Login....</h1>
-                    </div>
-                    <div>
-                        <Link to="/login" > Log In </Link>
-                    </div>
+                    <Redirect  to='/login' />
                 </div>
             )
         }
@@ -46,27 +41,11 @@ export default class Registration extends Component{
                     <h1>Dashboard</h1>
                     {' '}
                     <div>
-                        <div>
-                            <div>
-                                <header className="jumbotron">
-                                    <p>
-                                        Welcome<strong>{'  '}{currentUser.user.username}</strong>
-                                    </p>
-                                </header>
-                            </div>
-                            {' '}
-                            <p>
-                                <strong>Id:</strong>{" "}
-                                {currentUser.user._id}
-                            </p>
-                            <p>
-                                <strong>Email:</strong>{" "}
-                                {currentUser.user.email}
-                            </p>
-                        </div>
+                        <Link to="/dashboard/profile">Profile</Link>
                     </div>
+                    {' '}
                     <div>
-                        <a href="/login" onClick={this.logOut}>LogOut</a>
+                        <Link to="/login" onClick={this.logOut}>LogOut</Link>
                     </div>
                 </div>
             );
