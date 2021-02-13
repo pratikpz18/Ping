@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link,Redirect } from 'react-router-dom';
 import UserService from "../services/userservice";
 
-export default class Registration extends Component{
+export default class Dashboard extends Component{
 
     constructor(props) {
         super(props);
