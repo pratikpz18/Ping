@@ -40,16 +40,14 @@ router.get("/dashboard", auth, async (req, res) => {
     }
   });
 
-// router.get('/logout', (req, res) => {
-//     req.session.destroy(function(err){  
-//       if(err){  
-//           console.log(err);  
-//       }  
-//       else  
-//       {  
-//           res.redirect('/users/login');  
-//       }  
-//   });
-// });  
+router.get("/dashboard/profile", auth, async (req, res) => {
+  try {
+    // request.user is getting fetched from Middleware after token authentication
+      const user = await User.findById(req.user.id);
+      res.json(user);
+  } catch (e) {
+    res.send({ message: "Error in Fetching user" });
+  }
+});
 
 module.exports = router
