@@ -5,6 +5,7 @@ import Landing from './components/Landing';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import Dashboard from './components/Dashboard';
+import Profile from './components/Profile';
 
 class App extends Component {
   render(){
@@ -17,6 +18,7 @@ class App extends Component {
               <Route exact path="/register" component={Registration} exact/>
               <Route exact path="/login" component={Login} exact/>
               <Route exact path="/dashboard" component={Dashboard} exact/>
+              <Route exact path="/dashboard/profile" component={Profile} exact/>
           </Switch>
         </div>
       </Router>
