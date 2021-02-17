@@ -41,7 +41,7 @@ export default class Dashboard extends Component{
                     <h1>Dashboard</h1>
                     {' '}
                     <div>
-                        <Link to="/dashboard/profile">Profile</Link>
+                        <Link to={`/dashboard/profile/:${currentUser.user._id}`}>Profile</Link>
                     </div>
                     {' '}
                     <div>
