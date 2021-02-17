@@ -22,14 +22,6 @@ router.post('/login',[
     })
   ], usercontroller.login)
 
-// router.get("/login",function (req, res) { 
-//     res.render("login"); 
-// });
-
-// router.get("/register", function (req, res) { 
-//     res.render("register"); 
-// });
-
 router.get("/dashboard", auth, async (req, res) => {
     try {
       // request.user is getting fetched from Middleware after token authentication
@@ -40,10 +32,11 @@ router.get("/dashboard", auth, async (req, res) => {
     }
   });
 
-router.get("/dashboard/profile", auth, async (req, res) => {
+router.get("/dashboard/profile/:userid", auth, async (req, res) => {
   try {
+    const userid = req.params.userid;
     // request.user is getting fetched from Middleware after token authentication
-      const user = await User.findById(req.user.id);
+      const user = await User.findById(userid);
       res.json(user);
   } catch (e) {
     res.send({ message: "Error in Fetching user" });
