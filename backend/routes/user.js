@@ -43,4 +43,7 @@ router.get("/dashboard/profile/:userid", auth, async (req, res) => {
   }
 });
 
+router.post('/dashboard/search',usercontroller.search)
+
+
 module.exports = router
