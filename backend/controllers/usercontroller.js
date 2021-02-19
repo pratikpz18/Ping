@@ -81,7 +81,7 @@ const login = async (req,res,next)=>{
       if (!user){
         // req.session.userid=null;
         return res.status(400).json({
-          message: "User Not Exist"
+          msg: "User Not Exist"
         });
       }
 
@@ -123,7 +123,31 @@ const login = async (req,res,next)=>{
     }
   };
 
+
+  const search = async (req,res,next) => {
+    const {email,username}=req.body;
+    var re = new RegExp( username,'gi');
+    try{
+      let user = await User.find({username:re});
+      if (!user){
+        return res.status(400).json({
+          msg: "error fetching user"
+        });
+      }
+      res.status(200).json({
+        message:"user found",
+        user,
+      });
+    }catch (e) {
+      console.error(e);
+      res.status(500).json({
+        message: "Server Error"
+      });
+    }
+  }
+
   module.exports = { 
 	register,
-	login
+	login,
+  search
 }
