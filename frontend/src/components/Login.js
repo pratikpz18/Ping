@@ -188,13 +188,6 @@ export default class Login extends Component{
                     </div>
                     {' '}
                 </div>
-                {' '}
-                {LoginError && 
-                    (<div>
-                        {LoginError}
-                    </div>) 
-                }
-                {' '}
             </div>
         );
     }
