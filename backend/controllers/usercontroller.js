@@ -125,10 +125,10 @@ const login = async (req,res,next)=>{
 
 
   const search = async (req,res,next) => {
-    const {email,username}=req.body;
-    var re = new RegExp( username,'gi');
+    const {username}=req.body;
+    var re = new RegExp(username,'gi');
     try{
-      let user = await User.find({username:re});
+      let user = await User.find({username:re}).select("_id username email");
       if (!user){
         return res.status(400).json({
           msg: "error fetching user"
