@@ -124,7 +124,7 @@ const login = async (req,res,next)=>{
   };
 
 
-  const search = async (req,res,next) => {
+  const search = async (req,res) => {
     const {username}=req.body;
     var re = new RegExp(username,'gi');
     try{
@@ -146,8 +146,33 @@ const login = async (req,res,next)=>{
     }
   }
 
+  const addfriend = async (req,res) => {
+    const id=req.body.id;
+    const fid=req.body.fid;
+    try{
+      let user = await User.findByIdAndUpdate( id,{ $push: {"friendsList" : {friendId:fid}} } )
+      if (user){
+        await User.findByIdAndUpdate( fid,{ $push: {"friendsList" : {friendId:id}} } )
+        res.status(200).json({
+          message:"user found",
+          user,
+        });
+      }else{
+        return res.status(400).json({
+          msg: "error fetching user",
+        });
+    }
+    }catch (e) {
+      console.error(e);
+      res.status(500).json({
+        message: "Server Error"
+      });
+    }
+  }
+
   module.exports = { 
 	register,
 	login,
-  search
+  search,
+  addfriend,
 }
