@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { SearchUser } from '../services/SearchService';
-import Modal from 'react-bootstrap/Modal'
+import { AddFreind, SearchUser } from '../services/SearchService';
+import UserService from "../services/userservice";
+import Modal from 'react-bootstrap/Modal';
+import axios from 'axios';
 
 class SearchModal extends Component {
   constructor(props){
@@ -8,7 +10,9 @@ class SearchModal extends Component {
     this.state = {
         show: false,
         search: '',
-        userdetails:[]
+        userdetails:[],
+        active_id: null,
+        requestedIds: {},
     }
 
     this.handleShow = this.handleShow.bind(this);
@@ -19,8 +23,9 @@ class SearchModal extends Component {
 handleShow() {
     this.setState({ show: true })
 }
+
 handleClose(){
-    this.setState({ show: false })
+    this.setState({ show: false,search:'' })
 }
 
 onTextboxChangeSearch(event) {
@@ -29,7 +34,6 @@ onTextboxChangeSearch(event) {
     search: value // <-- (1) update state
   });
 }
-
 
 SearchForUser = async () => { // <-- (3) refactored search function
   const { search, userdetails } = this.state;
@@ -45,15 +49,38 @@ componentDidUpdate(prevProps, prevState) {
   }
 }
 
+async handleProductSelect(elementid){
+  const {currentUser} = this.props;
+  const curid = currentUser.user._id ;
+  console.log(curid)
+  const fid = elementid;
+  this.setState(prevState =>({ 
+    active_id: prevState.active_id === fid ? null : fid, // toggle active id
+    requestedIds: {
+      ...prevState.requestedIds,
+      [fid]: fid, // add requested id
+    },
+  }))
+  console.log(fid)
+  const data = { 
+    id: curid,
+    fid:fid
+   }
+  const AddingFriendtoList = await AddFreind(data);
+  console.log(AddingFriendtoList);
+  const userdata = await UserService.getUser(curid);
+  console.log(userdata);
+  const user = JSON.parse(localStorage.getItem('user'));
+  localStorage.setItem('user', JSON.stringify(userdata));
+}
 
 render() {
     let {search,userdetails}= this.state;
+    const {currentUser} = this.props;
     return (
        <div>
           <Modal show={this.state.show} onHide={this.handleClose} 
-          dialogClassName="modal-90w"
-          aria-labelledby="example-custom-modal-styling-title"
-           >
+          >
              <Modal.Header closeButton>
                <Modal.Title>
                  <input 
@@ -68,10 +95,25 @@ render() {
                <h3>Users</h3>
                <div>
                 <ul className="collection">
-                  {userdetails.map((element,i) => {
-                    return(
-                      <li key={i}>{element.username}</li>
-                    );
+                  {userdetails.map((element) => {
+                    if(currentUser.user.username !== element.username){
+                      return(
+                        <div key={element._id}>
+                          <li>{element.username}{' '}<input 
+                          type="button" 
+                          id={element._id} 
+                          onClick={this.handleProductSelect.bind(this,element._id )} 
+                          value={this.state.requestedIds[element._id] ? 'Message' : 'Add Friend'}
+                          style = {{backgroundColor: ( element._id === this.state.active_id ?  'yellow' : "white")}}></input></li>
+                        </div>
+                      );
+                    }else{
+                      return(
+                        <div key={element._id}>
+                          <li>{element.username}</li>
+                        </div>
+                      );
+                    }
                   })}
                 </ul>
                </div>
