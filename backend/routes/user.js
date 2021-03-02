@@ -43,7 +43,19 @@ router.get("/dashboard/profile/:userid", auth, async (req, res) => {
   }
 });
 
+router.get('/dashboard/search/:id', async (req, res) => {
+  try {
+      const id = req.params.id;
+      const user = await User.findById(id);
+      res.json(user);
+  } catch (e) {
+      res.send({ message: "Error in Fetching user" });
+  }
+});
+
 router.post('/dashboard/search',usercontroller.search)
+
+router.post('/dashboard/search/addfriend',usercontroller.addfriend)
 
 
 module.exports = router
