@@ -4,9 +4,10 @@ import authHeader from './auth-header';
 const API_URL = 'http://localhost:4000/users/';
 
 class UserService {
-  // getUserBoard() {
-  //   return axios.get(API_URL + 'dashboard', { headers: authHeader() });
-  // }
+  getUser(value) {
+    return axios.get(`http://localhost:4000/users/dashboard/search/${value}`)
+                .then(res=> res.data)
+  }
 
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));;
