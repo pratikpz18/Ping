@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link,Redirect } from 'react-router-dom';
 import UserService from "../services/userservice";
+import SearchModal from './SearchModal'
 
 export default class Dashboard extends Component{
 
@@ -9,7 +10,7 @@ export default class Dashboard extends Component{
     
         this.state = {
             currentUser: UserService.getCurrentUser(),
-            isLoading:false
+            isLoading:false,
         };
 
         this.logOut = this.logOut.bind(this);
@@ -20,6 +21,14 @@ export default class Dashboard extends Component{
         UserService.logout()
     }
 
+    SearchModalRef = (obj) => {
+        this.showModal = obj && obj.handleShow;
+    }
+    
+    onClick = () => {
+        this.showModal();
+    }
+     
     render(){
         const { currentUser ,isLoading } = this.state;
         console.log(currentUser)
@@ -38,14 +47,25 @@ export default class Dashboard extends Component{
         else{
             return(
                 <div>
-                    <h1>Dashboard</h1>
-                    {' '}
+                    <header>
+                        <h1>Dashboard</h1>
+                        {' '}
+                        <div>
+                            <Link to={`/dashboard/profile/:${currentUser.user._id}`}>Profile</Link>
+                        </div>
+                        {' '}
+                        <div>
+                            <Link to="/login" onClick={this.logOut}>LogOut</Link>
+                        </div>
+                        {' '}
+                        
+                        <SearchModal currentUser={this.state.currentUser} ref={this.SearchModalRef} ></SearchModal>
+                        <button type="button" onClick={this.onClick}>
+                        Search
+                        </button>
+                    </header>
                     <div>
-                        <Link to={`/dashboard/profile/:${currentUser.user._id}`}>Profile</Link>
-                    </div>
-                    {' '}
-                    <div>
-                        <Link to="/login" onClick={this.logOut}>LogOut</Link>
+
                     </div>
                 </div>
             );
