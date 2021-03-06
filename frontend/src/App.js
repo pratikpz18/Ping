@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Registration from './components/Registration';
 import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
+import Messages from './components/Messages';
 
 class App extends Component {
   render(){
@@ -19,6 +20,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} exact/>
               <Route exact path="/dashboard" component={Dashboard} exact/>
               <Route exact path="/dashboard/profile/:userid" component={Profile} exact/>
+              <Route exact path="/dashboard/Messages" component={Messages} exact/>
           </Switch>
         </div>
       </Router>
