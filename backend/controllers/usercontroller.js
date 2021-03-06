@@ -150,9 +150,9 @@ const login = async (req,res,next)=>{
     const id=req.body.id;
     const fid=req.body.fid;
     try{
-      let user = await User.findByIdAndUpdate( id,{ $push: {"friendsList" : {friendId:fid}} } )
+      let user = await User.findByIdAndUpdate( id,{ $push: {"friendsList" : fid} } )
       if (user){
-        await User.findByIdAndUpdate( fid,{ $push: {"friendsList" : {friendId:id}} } )
+        await User.findByIdAndUpdate( fid,{ $push: {"friendsList" : id} } )
         res.status(200).json({
           message:"user found",
           user,
