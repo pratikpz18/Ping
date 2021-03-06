@@ -18,19 +18,11 @@ const UserSchema = mongoose.Schema({
     default: Date.now()
   },
   friendsList: [{
-    friendId: {
+    // friendId: {
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'user'
-    },
-    // status: {
-    //   type: Number,
-    //   enums: [
-    //       1,    //'requested',
-    //       2,    //'pending',
-    //       3,    //'friends'
-    //   ]
-    // }
-    }]
+    // },
+  }]
 });
 
 // export model user with UserSchema
