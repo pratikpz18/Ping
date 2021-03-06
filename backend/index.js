@@ -26,7 +26,7 @@ const server = app.listen(PORT, (req, res) => {
   console.log(`Server Started at PORT ${PORT}`);
 });
 
-const io = require("socket.io").listen(server);
+const io = require("socket.io");
 
 // Assign socket object to every request
 app.use(function (req, res, next) {
