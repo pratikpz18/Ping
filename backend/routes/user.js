@@ -2,6 +2,7 @@ const express = require('express')
 const { check, validationResult} = require("express-validator");
 const auth = require("../middleware/auth");
 const router = express.Router()
+const mongoose = require("mongoose");
 
 const usercontroller = require('../controllers/usercontroller')
 const User = require('../models/usermodel')
@@ -15,6 +16,7 @@ router.post('/register',[
         min: 6
     })
 ], usercontroller.register)
+
 router.post('/login',[
     check("email", "Please enter a valid email").isEmail(),
     check("password", "Please enter a valid password").isLength({
@@ -53,9 +55,24 @@ router.get('/dashboard/search/:id', async (req, res) => {
   }
 });
 
+router.post('/dashboard/messages', async (req, res) => {
+  try {
+      const userid = req.body.userid;
+      const user = await User.aggregate([
+          { $match: { friendsList: mongoose.Types.ObjectId(userid) } },
+      ]);
+      if (user.length) {
+          res.send(user);
+      } else {
+          res.send({ message: 'error' });
+      }
+  } catch (e) {
+      res.send(e);
+  }
+});
+
 router.post('/dashboard/search',usercontroller.search)
 
 router.post('/dashboard/search/addfriend',usercontroller.addfriend)
-
 
 module.exports = router
