@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { AddFreind, SearchUser } from '../services/SearchService';
 import UserService from "../services/userservice";
 import Modal from 'react-bootstrap/Modal';
-import axios from 'axios';
 
 class SearchModal extends Component {
   constructor(props){
@@ -49,7 +48,7 @@ componentDidUpdate(prevProps, prevState) {
   }
 }
 
-async handleProductSelect(elementid){
+async handleFreindRequest(elementid){
   const {currentUser} = this.props;
   const curid = currentUser.user._id ;
   console.log(curid)
@@ -71,8 +70,10 @@ async handleProductSelect(elementid){
   const userdata = await UserService.getUser(curid);
   console.log(userdata);
   const user = JSON.parse(localStorage.getItem('user'));
-  localStorage.setItem('user', JSON.stringify(userdata));
+  console.log(user.user.friendsList.push(fid));
+  localStorage.setItem('user', JSON.stringify(user));
 }
+
 
 render() {
     let {search,userdetails}= this.state;
@@ -97,16 +98,22 @@ render() {
                 <ul className="collection">
                   {userdetails.map((element) => {
                     if(currentUser.user.username !== element.username){
-                      return(
+                      if(JSON.parse(localStorage.getItem('user')).user.friendsList.some(item => item)){
                         <div key={element._id}>
-                          <li>{element.username}{' '}<input 
-                          type="button" 
-                          id={element._id} 
-                          onClick={this.handleProductSelect.bind(this,element._id )} 
-                          value={this.state.requestedIds[element._id] ? 'Message' : 'Add Friend'}
-                          style = {{backgroundColor: ( element._id === this.state.active_id ?  'yellow' : "white")}}></input></li>
+                          <li>{element.username}<input id={element._id} type="button" value="Added"></input></li>
                         </div>
-                      );
+                      }else{
+                        return(
+                          <div key={element._id}>
+                            <li>{element.username}{' '}<input 
+                            type="button" 
+                            id={element._id} 
+                            onClick={this.handleFreindRequest.bind(this,element._id )} 
+                            value={this.state.requestedIds[element._id] ? 'Added' : 'Add Friend'}
+                            style = {{backgroundColor: ( element._id === this.state.active_id ?  'yellow' : "white")}}></input></li>
+                          </div>
+                        );
+                      }
                     }else{
                       return(
                         <div key={element._id}>
