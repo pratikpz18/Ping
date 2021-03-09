@@ -1,3 +1,3 @@
 # Ping
-creating a secure messsaging/chatting app
+creating a messsaging/chatting app
 PROJECT IN PROGRESS . . . . . .
