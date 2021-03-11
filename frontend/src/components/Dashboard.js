@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link,Redirect } from 'react-router-dom';
 import UserService from "../services/userservice";
 import SearchModal from './SearchModal';
-import Messages from './Messages';
 
 export default class Dashboard extends Component{
 
@@ -66,7 +65,7 @@ export default class Dashboard extends Component{
                         </button>
                         {' '}
                         <div>
-                            <Link to={'/dashboard/messages'} currentUser={this.state.currentUser}>Messages</Link>
+                            <Link to={'/dashboard/messages'} >Messages</Link>
                         </div>
                         {' '}
                     </header>
