@@ -19,7 +19,7 @@ class App extends Component {
               <Route exact path="/register" component={Registration} exact/>
               <Route exact path="/login" component={Login} exact/>
               <Route exact path="/dashboard" component={Dashboard} exact/>
-              <Route exact path="/dashboard/profile/:userid" component={Profile} exact/>
+              <Route exact path="/dashboard/profile/:userid" render={(props) => <Profile {...props} />} exact/>
               <Route exact path="/dashboard/Messages" component={Messages} exact/>
           </Switch>
         </div>
