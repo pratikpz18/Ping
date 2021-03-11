@@ -11,6 +11,11 @@ class UserService {
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));;
   }
+
+  getUserById(userid){
+    return axios.get(`http://localhost:4000/users/dashboard/profile/${userid}`)
+                .then(res=>res.data)
+  }
   
   logout() {
     localStorage.removeItem("user");
