@@ -54,6 +54,10 @@ router.get('/dashboard/search/:id', async (req, res) => {
   }
 });
 
+router.post('/dashboard/search',usercontroller.search)
+
+router.post('/dashboard/search/addfriend',usercontroller.addfriend)
+
 router.post('/dashboard/messages', async (req, res) => {
   try {
       const userid = req.body.userid;
@@ -69,9 +73,5 @@ router.post('/dashboard/messages', async (req, res) => {
       res.send(e);
   }
 });
-
-router.post('/dashboard/search',usercontroller.search)
-
-router.post('/dashboard/search/addfriend',usercontroller.addfriend)
 
 module.exports = router
