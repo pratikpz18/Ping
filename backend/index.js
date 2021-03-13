@@ -45,14 +45,26 @@ io.on('connection', (socket) => { /* socket object may be used to send specific 
   socket.on('send', (data)=>{
     console.log("Receive data from single username",data)
     socket.join(`${data.username}`) //IF I COMMENT THIS USERNAME IS TOGGLING BUT MSG OF PREVIOUS USER IS STILL THERE
-    // io.emit(`${data.username}`, data)
-    io.emit('send',data)
-    io.sockets.in(`${data.username}`).emit(`${data.username}`,data)
-    // socket.to(`${data.username}`).emit('message',data.message);
+    // io.emit(`${data.username}`, data)..
+    // io.emit('send',data)..
+    // socket.broadcast.to(`${data.username}`).emit(`${data.username}`,data)..
+    // socket.to(`${data.username}`).emit('message',data.message);..
+    io.emit('sended',data)
+    socket.to(`${data.username}`).emit(`${data.username}`,data)
+    // socket.join(data.username);
+    // io.sockets.in(data.username).emit('new_msg', data);
   });
+  // socket.on("online", data => {
+  //   socket.name = data.username;
+  //   onlineUsers.push(data);
+  //   sockets[data.username] = socket.id;
+  // });
+  // socket.on("message", function(data) {
+  //   socket.broadcast.emit("public", data);
+  // });
   
   socket.on('disconnect',()=>{
-    io.emit('message','user left')
+    console.log("disconnect")
   })
 });
 
