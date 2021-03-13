@@ -12,6 +12,7 @@ class SearchModal extends Component {
         userdetails:[],
         active_id: null,
         requestedIds: {},
+        
     }
 
     this.handleShow = this.handleShow.bind(this);
@@ -64,7 +65,11 @@ async handleFreindRequest(elementid){
   const data = { 
     id: curid,
     fid:fid
-   }
+  }
+  if((JSON.parse(localStorage.getItem('user')).user.friendsList.some(item => item == elementid))){
+    console.log(data.fid,elementid)
+    return
+  }else{
   const AddingFriendtoList = await AddFreind(data);
   console.log(AddingFriendtoList);
   const userdata = await UserService.getUser(curid);
@@ -72,6 +77,7 @@ async handleFreindRequest(elementid){
   const user = JSON.parse(localStorage.getItem('user'));
   console.log(user.user.friendsList.push(fid));
   localStorage.setItem('user', JSON.stringify(user));
+  }
 }
 
 
@@ -98,10 +104,12 @@ render() {
                 <ul className="collection">
                   {userdetails.map((element) => {
                     if(currentUser.user.username !== element.username){
-                      if(JSON.parse(localStorage.getItem('user')).user.friendsList.some(item => item)){
+                      if((JSON.parse(localStorage.getItem('user')).user.friendsList.some(item => item == element._id))){
+                        return(
                         <div key={element._id}>
-                          <li>{element.username}<input id={element._id} type="button" value="Added"></input></li>
+                          <li>{element.username}<input id={element._id} type="button" value="Added" style = {{backgroundColor:"yellow"}}></input></li>
                         </div>
+                        )
                       }else{
                         return(
                           <div key={element._id}>
@@ -114,7 +122,8 @@ render() {
                           </div>
                         );
                       }
-                    }else{
+                    }
+                    else{
                       return(
                         <div key={element._id}>
                           <li>{element.username}</li>
