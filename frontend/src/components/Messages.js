@@ -23,13 +23,14 @@ export default class Messages extends Component {
     }
 
     componentDidMount(){
+        const {currentUser}=this.state
         this.fetchUser()
         this.socket.on('connect',()=> {
             this.setState({ socketConnected : true})
             // console.log("connection")
         })
         // this.socket.emit('send',{username:this.username,message:this.message,senderusername:currentUser.user.username});
-        this.socket.on('send',(data)=>{
+        this.socket.on('sended',(data)=>{ 
             console.log('component did mount',data)
             // if(data.message.length>0){
                 this.setState({messages:[...this.state.messages,data]})
@@ -53,13 +54,10 @@ export default class Messages extends Component {
     }
 
     showMessageSpace(elementusername){
-        const {currentUser} =this.state
         this.setState({
             show: true,
             username:elementusername
-          });
-        // console.log(elementusername)
-        this.SendMessage(this.username,this.message,currentUser.user.username)
+        });
     }
 
     onTextboxChangeMessage(e){
@@ -69,28 +67,16 @@ export default class Messages extends Component {
     SendMessage(username,message,senderusername){
         const {messages} =this.state
         if(this.state.socketConnected){
-            // this.socket.on("New connection", () => {
-            //     console.log('New connection from client side')
-            // });
             console.log('if condition test',username,message,senderusername )
             this.socket.emit('send',{username,message,senderusername});
-            // this.socket.on('send',(data)=>{
-            //     console.log(data)
-            //     this.setState({messages:[...this.state.messages,data]})
-            // })
             console.log('condition username',`${username}`,  )
             this.socket.on(`${username}`, (d)=>{
-                // console.log('test from receive username', d)
-                // if(message?.lenght>0) {
                     this.setState({messages:[...messages,d]})
-                    // this.setState({[`${username}`]:[...this.state[`${username}`], d]})
-                // }
-                // else{
-                //     // this.setState({[`${username}`]:[d]})
-                //     this.setState({messages:[d]})
-                // }
-               
             })
+            // this.socket.on("new_msg",data=> {
+            //     console.log("private",data)
+            //     this.setState({messages:[...messages,data]})
+            //  })
             // this.socket.on("message", (d) => {
             //     this.socket.on(`${this.username}`, (d)=>{
             //         console.log('test from receive username', d)
@@ -154,8 +140,8 @@ export default class Messages extends Component {
                             <div>
                                 <ul>
                                 {/* { this.state[`${this.state.username}`]?.map((msg,key) =>{ */}
-                                {messages.map((msg,key) =>{
-                                    return(<li key={key}><span>{msg?.message}</span></li>);
+                                {messages.length > 0 && messages.map((msg,key) =>{
+                                    return(<li key={key}>{msg.senderusername}<span>{' '}{msg.message}</span></li>);
                                 })
                                 }
                                 </ul>
