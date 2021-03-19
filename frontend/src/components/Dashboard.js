@@ -47,32 +47,34 @@ export default class Dashboard extends Component{
         else{
             return(
                 <div>
-                    <header>
-                        <h1>Dashboard</h1>
-                        {' '}
-                        <div>
-                            <Link to={`/dashboard/profile/:${currentUser.user._id}`}>Profile</Link>
+                    <div className="navbar navbar-inverse">
+                        <div className="container-fluid">
+                            <div className="navbar-header">
+                                <Link to="/dashboard" className="logo-link">Ping</Link>
+                            </div>
+                            <div>
+                                <SearchModal currentUser={this.state.currentUser} ref={this.SearchModalRef} ></SearchModal>
+                                <button className="btn btn-search" type="button" onClick={this.onClick}>
+                                <i className="fa fa-search" aria-hidden="true"></i>
+                                    Search
+                                </button>
+                            </div>
+                            <div>
+                                <Link className="link" to={`/dashboard/profile/:${currentUser.user._id}`}>Profile</Link>
+                            </div>
+                            <div>
+                                <Link className="link" to="/login" onClick={this.logOut}><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</Link>
+                            </div>
                         </div>
-                        {' '}
-                        <div>
-                            <Link to="/login" onClick={this.logOut}>LogOut</Link>
-                        </div>
-                        {' '}
-                        
-                        <SearchModal currentUser={this.state.currentUser} ref={this.SearchModalRef} ></SearchModal>
-                        <button type="button" onClick={this.onClick}>
-                        Search
+                    </div>
+                <div className="container"> 
+                    <div className="call-to-action">
+                        <button className="btn btn-secondary messages">
+                        <Link  to={'/dashboard/messages'} className="link link-message">Messages</Link>
                         </button>
-                        {' '}
-                        <div>
-                            <Link to={'/dashboard/messages'} >Messages</Link>
-                        </div>
-                        {' '}
-                    </header>
-                    <div>
-
                     </div>
                 </div>
+            </div>
             );
         }
     }
