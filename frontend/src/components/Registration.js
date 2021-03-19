@@ -164,68 +164,76 @@ export default class Registration extends Component{
             if (!token) {
                 return(
                     <div className="Registration">
-                        {' '}
-                        <div className="status">
-                            {' '}
-                            {error && <Error message={ERROR_IN_REGISTRATION} />}
-                            {' '}
-                            {register && <Message message={REGISTRATION_MESSAGE} />}
-                            {' '}
-                        </div>
-                        {' '}
-                        <div>
-                            <h1>REGISTER</h1>
-                        </div>
-                        {' '}
-                        <div>
-                            <input
-                            type="username"
-                            placeholder="Username"
-                            autoComplete="Username"
-                            value={RegistrationUsername}
-                            onChange={this.onTextboxChangeRegistrationUsername}
-                            /><br />
-                            <input
-                            type="email"
-                            placeholder="Email"
-                            autoComplete="Email"
-                            value={RegistrationEmail}
-                            onChange={this.onTextboxChangeRegistrationEmail}
-                            /><br />
-                            {' '}
-                            {fieldError.email && (
-                            <div >{fieldError.email}</div>
-                            )}
-                            {' '}
-                            <input
-                            type="password"
-                            placeholder="Password"
-                            value={RegistrationPassword}
-                            autoComplete="password"
-                            onChange={this.onTextboxChangeRegistrationPassword}
-                            /><br />
-                            {' '}
-                            {fieldError.password && (
-                            <div >{fieldError.password}</div>
-                            )}
-                            {' '}
-                            {' '}
-                            <div>
-                                <button onClick={this.onSignUp}>Sign Up</button>
+                        <div className="form">
+                            <div className="status">
+                                {error && <Error message={ERROR_IN_REGISTRATION} />}
                                 {' '}
-                                <Link to="/login"> Login </Link>
+                                {register && <Message message={REGISTRATION_MESSAGE} />}
+                                {' '}
                             </div>
                             {' '}
-                            {!register ? <div>{registerError}</div> : <Redirect  to='/login' />}
+                            <div className="header">
+                                <h1>REGISTER</h1>
+                            </div>
                             {' '}
-                        </div>{' '}
-                        {' '}
-                        {registerError && 
-                            (<div>
-                                {registerError}
-                            </div>) 
-                        }
-                        {' '}
+                            <div>
+                                <div className="input-group">
+                                    <i class="fa fa-user input-group-addon" aria-hidden="true"></i>
+                                    <input
+                                    type="username"
+                                    placeholder="Username"
+                                    autoComplete="Username"
+                                    className="form-control"
+                                    value={RegistrationUsername}
+                                    onChange={this.onTextboxChangeRegistrationUsername}
+                                    />
+                                </div>
+                                <div className="input-group">
+                                <i class="fa fa-envelope input-group-addon" aria-hidden="true"></i>
+                                    <input
+                                    type="email"
+                                    placeholder="Email"
+                                    autoComplete="Email"
+                                    className="form-control"
+                                    value={RegistrationEmail}
+                                    onChange={this.onTextboxChangeRegistrationEmail}
+                                    />
+                                    {fieldError.email && (
+                                    <div >{fieldError.email}</div>
+                                    )}
+                                </div>
+                                <div className="input-group">
+                                <i class="fa fa-lock input-group-addon" aria-hidden="true"></i>
+                                    <input
+                                    type="password"
+                                    placeholder="Password"
+                                    className="form-control"
+                                    value={RegistrationPassword}
+                                    autoComplete="password"
+                                    onChange={this.onTextboxChangeRegistrationPassword}
+                                    />
+                                    {fieldError.password && (
+                                    <div >{fieldError.password}</div>
+                                    )}
+                                </div>
+                                {' '}
+                                {' '}
+                                <div>
+                                    <button className="btn signup-btn" onClick={this.onSignUp}>Sign Up</button>
+                                    {' '}
+                                    <Link className="Login-link" to="/login"> Login </Link>
+                                </div>
+                                {' '}
+                                {!register ? <div>{registerError}</div> : <Redirect  to='/login' />}
+                                {' '}
+                            </div>{' '}
+                            {' '}
+                            {registerError && 
+                                (<div>
+                                    {registerError}
+                                </div>) 
+                            }
+                        </div>
                     </div>
                 );
             }
