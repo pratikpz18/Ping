@@ -140,54 +140,53 @@ export default class Login extends Component{
 
         return(
             <div className="Login">
-                {' '}
-                <div className="status">
-                    {' '}
-                    {error && <Error message={ERROR_IN_LOGIN} />}
-                    {' '}
-                    {login && <Message message={LOGIN_MESSAGE} />}
-                    {' '}
-                </div>
-                {' '}
-                <h1>LOGIN</h1>
-                {' '}
-                <div>
-                    <input
-                    type="email"
-                    placeholder="Email"
-                    autoComplete="Email"
-                    value={LoginEmail}
-                    onChange={this.onTextboxChangeLoginEmail}
-                    /><br />
-                    {' '}
-                    {fieldError.email && (
-                    <div >{fieldError.email}</div>
-                    )}
-                    {' '}
-                    <input
-                    type="password"
-                    placeholder="Password"
-                    value={LoginPassword}
-                    autoComplete="password"
-                    onChange={this.onTextboxChangeLoginPassword}
-                    /><br />
-                    {' '}
-                    {fieldError.password && (
-                    <div >{fieldError.password}</div>
-                    )}
-                    {' '}
-                    {' '}
+                <div className="form">
+                    <div className="status">
+                        {error && <Error message={ERROR_IN_LOGIN} />}
+                        {login && <Message message={LOGIN_MESSAGE} />}
+                    </div>
+                    <h1 className="header">LOGIN</h1>
                     <div>
-                        <button onClick={this.onSignIn}>Sign In</button>
+                        <div className="input-group">
+                        <i class="fa fa-envelope input-group-addon" aria-hidden="true"></i>
+                        <input
+                        type="email"
+                        placeholder="Email"
+                        className="form-control"
+                        autoComplete="Email"
+                        value={LoginEmail}
+                        onChange={this.onTextboxChangeLoginEmail}
+                        />
+                        {fieldError.email && (
+                        <div >{fieldError.email}</div>
+                        )}
+                        </div>
+                        <div className="input-group">
+                        <i class="fa fa-lock input-group-addon" aria-hidden="true"></i>
+                        <input
+                        type="password"
+                        placeholder="Password"
+                        className="form-control"
+                        value={LoginPassword}
+                        autoComplete="password"
+                        onChange={this.onTextboxChangeLoginPassword}
+                        /><br />
+                        {fieldError.password && (
+                        <div >{fieldError.password}</div>
+                        )}
+                        </div>
+                        <div>
+                            <button className="btn signin-btn" onClick={this.onSignIn}>Sign In</button>
+                            {' '}
+                            <Link to="/register" className="Register-link"> Register </Link>
+                        </div>
                         {' '}
-                        <Link to="/register"> Register </Link>
+                        <div>
+                            {!login ? <div>{LoginError}</div> : <Redirect  to='/dashboard' />}
+                        </div>
+                        {' '}
                     </div>
-                    {' '}
-                    <div>
-                        {!login ? <div>{LoginError}</div> : <Redirect  to='/dashboard' />}
                     </div>
-                    {' '}
-                </div>
             </div>
         );
     }
