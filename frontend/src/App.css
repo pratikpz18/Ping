@@ -45,6 +45,103 @@
   background: url('./img/Landing.jpg') no-repeat center center fixed ;
   background-size: cover;
   height: 100%;
+  overflow:hidden;
+}
+
+.Landing-header{
+  position: absolute;
+  font-size: 46px;
+  left: 4%;
+  top: 4%;
+  color: var(--teal);
+  text-decoration: underline;
+  letter-spacing: 2;
+}
+
+.Landing-header:hover{
+  transform: scale(1.08);
+  color: var(--teal);
+}
+
+.Main-Text{
+  top: 32%;
+  left:25%;
+  line-height: 1;
+  color: #065357;
+}
+
+.Main-Text h3 strong{
+  margin-right: 10px;
+  font-size: 38px;
+}
+
+.quote-div{
+  line-height: 0.6;
+}
+
+.quote{
+  position: relative;
+  width: auto;
+  font-size: larger;
+}
+
+.p-quote{
+  position: relative;
+  font-size: 12px;
+}
+
+.CTA{
+  margin-top: 24px;
+  left: 30%;
+}
+
+.btn-register,
+.btn-login{
+  padding:8px 24px;
+  margin-left: 16px;
+  border: 1px solid var(--light);
+  background: var(--gray);
+}
+
+.btn-register:hover,
+.btn-login:hover{
+  transform: scale(1.05);
+}
+
+.register-icon,
+.login-icon{
+  padding-right: 8px;
+  font-size: larger;
+  color: var(--primary);
+}
+
+.btn-register{
+  background: transparent;
+  border: 1px solid var(--teal);
+}
+
+.register-link,
+.login-link{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.register-link,
+.register-icon{
+  color: var(--teal);
+}
+
+.register-link:hover{
+  color: var(--teal)
+}
+
+.login-link:hover{
+  color: var(--light);
+}
+
+.login-link,
+.login-icon{
+  color: var(--light);
 }
 
 .Registration,
