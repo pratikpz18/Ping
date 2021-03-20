@@ -29,14 +29,20 @@ export default class Landing extends Component{
         }
         else{
             return(
-                <div>
-                    <h1>Landing</h1>
-                    {' '}
-                    <div>
-                        <Link to="/register">Register</Link>{' '}
-                        <Link to="/login" > Log In </Link>
+                <div className="Landing">
+                    <h1><Link to="/" className="Landing-header">Ping</Link></h1>
+                    <div className="Main-Text col-sm-6">
+                        <h3><strong>Our Team</strong>Welcomes You!</h3>
+                        <div className="quote-div">
+                            <p className="quote">Spend some time and connect to your friends.</p>
+                            <p className="quote">Register for having a chat with your friends and family </p>
+                            <p className="p-quote">PS: Your Messages are not accessible by Us</p>
+                        </div>
+                    <div className="CTA">
+                        <button className="btn btn-register"><i class="fa fa-sign-in register-icon" aria-hidden="true"></i><Link to="/register" className="register-link">Sign Up</Link></button>
+                        <button className="btn btn-login"><i class="fa fa-sign-out login-icon" aria-hidden="true"></i><Link to="/login" className="login-link">Sign In </Link></button>
                     </div>
-                    {' '}
+                </div>
                 </div>
             );
         }
