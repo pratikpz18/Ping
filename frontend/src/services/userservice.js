@@ -20,6 +20,11 @@ class UserService {
   logout() {
     localStorage.removeItem("user");
   }
+
+  update(userid,data){
+    return axios.put(`http://localhost:4000/users/dashboard/editprofile/${userid}`,data)
+                .then(res=>res.data)
+  }
 }
 
 export default new UserService();
