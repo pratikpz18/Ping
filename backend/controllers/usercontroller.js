@@ -170,9 +170,30 @@ const login = async (req,res,next)=>{
     }
   }
 
+  const editprofile = async(req,res) => {
+    const userid = req.params.userid;
+    const user = await User.findByIdAndUpdate({_id:userid},{
+      username:req.body.username,
+      bio:req.body.bio
+    })
+    try{
+      if(user){
+        res.status(200).json({
+          user,
+        });
+      }
+    }catch(e){
+      console.log(e)
+      res.status(500).json({
+        message: "Server Error"
+      });
+    }
+  }
+
   module.exports = { 
 	register,
 	login,
   search,
   addfriend,
+  editprofile
 }
