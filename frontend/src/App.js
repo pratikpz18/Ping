@@ -7,6 +7,7 @@ import Registration from './components/Registration';
 import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
 import Messages from './components/Messages';
+import EditProfile from './components/EditProfile'
 
 class App extends Component {
   render(){
@@ -21,6 +22,7 @@ class App extends Component {
               <Route exact path="/dashboard" component={Dashboard} exact/>
               <Route exact path="/dashboard/profile/:userid" render={(props) => <Profile {...props} />} exact/>
               <Route exact path="/dashboard/Messages" component={Messages} exact/>
+              <Route exact path="/dashboard/editprofile/:userid" render={(props) => <EditProfile {...props} />}  exact/>
           </Switch>
         </div>
       </Router>
