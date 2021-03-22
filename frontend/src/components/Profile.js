@@ -15,14 +15,14 @@ export default class Profile extends Component{
 
     logOut() {
         UserService.logout()
-    } 
+    }
 
     componentWillMount(){
         let userid = this.props.match.params.userid;
         userid=userid.slice(1)
         console.log('First this called');
         this.fetchUser(userid)
-      }
+    }
 
     async fetchUser(userid){
         try{
@@ -55,18 +55,32 @@ export default class Profile extends Component{
         else{
             return(
                 <div>
+                    <div className="navbar navbar-inverse">
+                    <div className="container-fluid">
+                            <div className="navbar-header">
+                                <Link to="/dashboard" className="logo-link">Ping</Link>
+                            </div>
+                            <div>
+                                <Link className="link" to="/login" onClick={this.logOut}><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</Link>
+                            </div>
+                        </div>
+                    </div>
                     <h1>Profile</h1>
-                    {' '}
                     <div>
                         <div>
                             <div>
-                                <header className="jumbotron">
+                                <header>
                                     <p>
-                                        Welcome<strong>{'  '}{currentUser.username}</strong>
+                                       Username:<strong>{'  '}{currentUser.username}</strong>
                                     </p>
                                 </header>
                             </div>
-                            {' '}
+                            {currentUser.bio &&
+                                <p>
+                                    <strong>Bio :</strong> 
+                                    {currentUser.bio}
+                                </p>
+                             }
                             <p>
                                 <strong>Id:</strong>{" "}
                                 {currentUser._id}
@@ -80,12 +94,11 @@ export default class Profile extends Component{
                             </p>
                         </div>
                     </div>
+                    {(currentUser._id==UserService.getCurrentUser().user._id) &&
                     <div>
-                        {' '}
-                        <Link to="/dashboard">Dashboard</Link>
-                        {' '}
-                        <Link to="/login" onClick={this.logOut}>LogOut</Link>
+                        <button className="btn-primary"><Link className="link" to={`/dashboard/editprofile/:${currentUser._id}`}>Edit</Link></button>
                     </div>
+                    }
                 </div>
             );
         }
