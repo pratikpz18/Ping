@@ -74,4 +74,6 @@ router.post('/dashboard/messages', async (req, res) => {
   }
 });
 
+router.put('/dashboard/editprofile/:userid',usercontroller.editprofile);
+
 module.exports = router
