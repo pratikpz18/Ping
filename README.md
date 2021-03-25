@@ -4,9 +4,9 @@
 </p>
 
 ### Instruction 
-To run this do first
+To run this 
 #### npm install 
-go inside backend folder and 
+then go to backend folder dir 
 ### npm run dev
 
 
@@ -20,6 +20,7 @@ go inside backend folder and
 - [BootStrap 4](https://getbootstrap.com/) - Frontend CSS Library
 
 ## Screenshots <a name = "Screenshots"></a>
+
 -Landing
 <img src="Screenshots/Landing.png" alt="Landing Page"
 - Login
