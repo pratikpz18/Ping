@@ -30,12 +30,13 @@ export default class Profile extends Component{
         this.fetchallUsers(userid)
     }
 
-    componentDidUpdate(){
-        let userid = this.props.match.params.userid;
-        userid=userid.slice(1)
-        console.log('First this called');
-        this.fetchUser(userid)
-        this.fetchallUsers(userid)
+    componentDidUpdate(prevProps,prevState){
+        if(this.props.match.params.userid) {
+            let userid = this.props.match.params.userid;
+            userid=userid.slice(1)
+            console.log('First this called');
+            this.fetchUser(userid)
+        }
     }
 
     async fetchUser(userid){
@@ -45,10 +46,8 @@ export default class Profile extends Component{
             this.setState({ currentUser:user})
             let local=JSON.parse(localStorage.getItem('user'))
             console.log(local.user)
-            local['user']=user
+            local['user']=user 
             localStorage.setItem('user',JSON.stringify(local))
-            let allusers = await UserService.getallUsers(userid)
-            this.setState({userdetails:allusers})
         }catch(err){
             console.log(err)
         }        
@@ -171,13 +170,13 @@ export default class Profile extends Component{
                                 console.log((JSON.parse(localStorage.getItem('user')).user.friendsList.some(item => item == element._id)))
                                 return(
                                 <div key={element._id} className="user-list-profile">
-                                <li className="list-group-item"><Link to={`/dashboard/profile/:${element._id}`}>{element.username}</Link><input id={element._id} type="button" className="list-group-btn" value="Friends" style = {{backgroundColor:"#17a2b8"}}></input></li>
+                                <li className="list-group-item suggestion-username">{element.username}<input id={element._id} type="button" className="list-group-btn" value="Friends" style = {{backgroundColor:"#17a2b8"}}></input></li>
                                 </div>
                                 )
                             }else{
                                 return(
                                 <div key={element._id} className="user-list-profile">
-                                    <li className="list-group-item"><Link to={`/dashboard/profile/:${element._id}`}>{element.username}</Link><input 
+                                    <li className="list-group-item suggestion-username">{element.username}<input 
                                     type="button" 
                                     id={element._id} 
                                     className="list-group-btn"
