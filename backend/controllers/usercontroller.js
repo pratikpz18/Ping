@@ -19,7 +19,6 @@ const register = async (req,res,next) => {
     } = req.body;
 try {
     let user = await User.findOne({
-      username,
       email
     });
     if (user) {
