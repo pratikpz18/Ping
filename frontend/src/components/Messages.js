@@ -151,7 +151,7 @@ export default class Messages extends Component {
                                     return(
                                     <div>
                                         <strong className="sendername"
-                                        style ={{marginLeft:(this.state.username === msg.senderusername ? '0' : '8vw'),
+                                        style ={{marginLeft:(this.state.username === msg.senderusername ? '0' : '2vw'),
                                                 marginRight:(this.state.username === msg.senderusername ? '60vw' : '0')}}>{msg.senderusername}</strong>
                                         <li 
                                         key={key}
