@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../App.css';
 import { Link,Redirect } from 'react-router-dom';
 import UserService from "../services/userservice";
 import {getUsersFriend} from "../services/messageservice";
@@ -72,8 +73,6 @@ export default class Messages extends Component {
         const {messages} =this.state
         if(this.state.socketConnected){
             console.log('if condition test',username,message,senderusername )
-            // this.socket.emit('send',{username,message,senderusername,to:this.socket.id });
-            // this.socket.emit('send',{username });
             console.log('condition username',`${username}`,  )
             console.log(this.socket.id)
             this.socket.emit('sended',{username,message,senderusername });
