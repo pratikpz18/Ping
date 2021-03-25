@@ -10,7 +10,8 @@ go inside backend folder and
 ### npm run dev
 
 
-## ⛏️ Built With <a name = "tech_stack"></a>
+## ⛏️ Built Using <a name = "tech_stack"></a>
+ #### MERN
 - [MongoDB](https://https://www.mysql.com/) - NoSQL Database
 - [Express](https://expressjs.com/) - Backend NodeJs Framework
 - [ReactJS](https://reactjs.org/)-Frontend Javascript Library
@@ -34,9 +35,9 @@ go inside backend folder and
 - EditProfile 
 <img src="Screenshots/EditProfile.png" alt="EditProfile Page">
 - Messages 1
-<img src="Screenshots/Messages1.png" alt="Messages Page">
+<img src="Screenshots/Message1.png" alt="Messages Page">
 - Messages 2
-<img src="Screenshots/Messages2.png" alt="Messages Page">
+<img src="Screenshots/Message2.png" alt="Messages Page">
 
 ## Installing
 - [NodeJS](https://nodejs.org/en/) - Install NodeJS
@@ -71,16 +72,17 @@ go inside backend folder and
     
     => Add Friends:
        ____
-        ⋅⋅* User can add friend. If user is friend of other user, then that user is displayed in Messages SECTION.
+        • User can add friend. If user is friend of other user, then that user is displayed in Messages SECTION.
 
     => Search Bar: 
         _____
-       ⋅⋅* User can search for other users. 
+       • User can search for other users. 
 
     => Edit Profile :
-        User can change his/her username and update his/her bio.
+       _____
+       • User can change his/her username and update his/her bio.
    
- ## 5. Functionality
+ ## Functionality
     ❖ Registration
     ❖ Login
     ❖ Update your profile details 
