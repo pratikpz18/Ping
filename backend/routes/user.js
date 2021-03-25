@@ -76,4 +76,19 @@ router.post('/dashboard/messages', async (req, res) => {
 
 router.put('/dashboard/editprofile/:userid',usercontroller.editprofile);
 
+router.get('/dashboard/profile/allusers/:userid', async (req,res) => {
+  try{
+    const userid = req.params.userid;
+    let user=await User.find({ _id: { $ne: userid } }).limit(3)
+    if(!user){
+      console.log("err");
+    } else{
+        res.status(200).json(user);
+    }
+  }
+  catch(err){
+    res.status(500).json(err)
+  }
+});
+
 module.exports = router
