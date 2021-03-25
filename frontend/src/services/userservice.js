@@ -25,6 +25,11 @@ class UserService {
     return axios.put(`http://localhost:4000/users/dashboard/editprofile/${userid}`,data)
                 .then(res=>res.data)
   }
+
+  getallUsers(userid){
+    return axios.get(`http://localhost:4000/users/dashboard/profile/allusers/${userid}`)
+                .then(res=>res.data)
+  }
 }
 
 export default new UserService();
