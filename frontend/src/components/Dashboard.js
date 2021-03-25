@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../App.css'
 import { Link,Redirect } from 'react-router-dom';
 import UserService from "../services/userservice";
 import SearchModal from './SearchModal';
@@ -46,7 +47,7 @@ export default class Dashboard extends Component{
         }
         else{
             return(
-                <div>
+                <div className="dashboard-container">
                     <div className="navbar navbar-inverse">
                         <div className="container-fluid">
                             <div className="navbar-header">
@@ -60,21 +61,22 @@ export default class Dashboard extends Component{
                                 </button>
                             </div>
                             <div>
-                                <Link className="link" to={`/dashboard/profile/:${currentUser.user._id}`}>Profile</Link>
+                                <Link className="link" to={`/dashboard/profile/:${currentUser.user._id}`} >Profile</Link>
                             </div>
                             <div>
                                 <Link className="link" to="/login" onClick={this.logOut}><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</Link>
                             </div>
                         </div>
                     </div>
-                <div className="container"> 
-                    <div className="call-to-action">
-                        <button className="btn btn-secondary messages">
-                        <Link  to={'/dashboard/messages'} className="link link-message">Messages</Link>
-                        </button>
+                    <div className="container"> 
+                        <div className="call-to-action">
+                            <p className="cta-text">For Chatting Click here <i class="fa fa-level-down" aria-hidden="true"></i></p>
+                            <button className="btn btn-secondary messages">
+                            <Link  to={'/dashboard/messages'} className="link link-message">Messages</Link>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
             );
         }
     }
