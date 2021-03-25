@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
+import '../App.css';
 import { Link,Redirect } from 'react-router-dom';
 import { UserRegistration } from '../services/RegistrationService';
 import Message from '../elements/Message';
 import Error from '../elements/Error';
-import {
-    REGISTRATION_MESSAGE,
-    ERROR_IN_REGISTRATION,
-  } from '../MessageBundle';
 
 export default class Registration extends Component{
     constructor(props){
@@ -76,33 +73,9 @@ export default class Registration extends Component{
             username: RegistrationUsername,
             password: RegistrationPassword,
         };
-
-        // axios.post('http://localhost:4000/users/register', data)
-        //     .then(res => {
-        //         console.log('res:', res);
-        //         if (res.status===200) {
-        //             this.setState ({
-        //                 RegistrationUsername:'',
-        //                 RegistrationEmail:'',
-        //                 RegistrationPassword:'',
-        //                 register: true,
-        //                 error: false,
-        //                 isLoading:false,
-        //         });
-        //         } else
-        //             this.setState ({
-        //             error: true,
-        //             register: false,
-        //             isLoading:false,
-        //         });
-            // .catch(function (error) {
-            //     console.log(error);
-            // });
-        // });
         
         try{
         const registerStatus =await UserRegistration (data);
-        // if (registerStatus.status === 200) {
         console.log(registerStatus);
         this.setState ({
             RegistrationUsername:'',
@@ -123,7 +96,10 @@ export default class Registration extends Component{
                         error: true,
                         register: false,
                         isLoading:false,
-                        fieldError:err.response.data.errors
+                        fieldError:err.response.data.errors,
+                        RegistrationUsername:'',
+                        RegistrationEmail:'',
+                        RegistrationPassword:'',
                     });
                 }
                 else if(err.response.data.msg){
@@ -132,6 +108,9 @@ export default class Registration extends Component{
                     register: false,
                     isLoading:false,
                     registerError: err.response.data.msg,
+                    RegistrationUsername:'',
+                    RegistrationEmail:'',
+                    RegistrationPassword:'',
                 });
 
 
@@ -166,16 +145,11 @@ export default class Registration extends Component{
                     <div className="Registration">
                         <div className="form">
                             <div className="status">
-                                {error && <Error message={ERROR_IN_REGISTRATION} />}
-                                {' '}
-                                {register && <Message message={REGISTRATION_MESSAGE} />}
-                                {' '}
+                                {!register ? <div>{registerError}</div> : <Redirect  to='/login' />}
                             </div>
-                            {' '}
                             <div className="header">
                                 <h1>REGISTER</h1>
                             </div>
-                            {' '}
                             <div>
                                 <div className="input-group">
                                     <i class="fa fa-user input-group-addon" aria-hidden="true"></i>
@@ -183,7 +157,7 @@ export default class Registration extends Component{
                                     type="username"
                                     placeholder="Username"
                                     autoComplete="Username"
-                                    className="form-control"
+                                    className="form-control register"
                                     value={RegistrationUsername}
                                     onChange={this.onTextboxChangeRegistrationUsername}
                                     />
@@ -194,45 +168,33 @@ export default class Registration extends Component{
                                     type="email"
                                     placeholder="Email"
                                     autoComplete="Email"
-                                    className="form-control"
+                                    className="form-control register"
                                     value={RegistrationEmail}
                                     onChange={this.onTextboxChangeRegistrationEmail}
                                     />
-                                    {fieldError.email && (
-                                    <div >{fieldError.email}</div>
-                                    )}
                                 </div>
+                                {fieldError.email && (
+                                    <div className="fieldError">{fieldError.email}</div>
+                                    )}
                                 <div className="input-group">
                                 <i class="fa fa-lock input-group-addon" aria-hidden="true"></i>
                                     <input
                                     type="password"
                                     placeholder="Password"
-                                    className="form-control"
+                                    className="form-control register"
                                     value={RegistrationPassword}
                                     autoComplete="password"
                                     onChange={this.onTextboxChangeRegistrationPassword}
                                     />
-                                    {fieldError.password && (
-                                    <div >{fieldError.password}</div>
-                                    )}
                                 </div>
-                                {' '}
-                                {' '}
-                                <div>
+                                {fieldError.password && (
+                                    <div className="fieldError">{fieldError.password}</div>
+                                    )}
+                                <div className="btn-group">
                                     <button className="btn signup-btn" onClick={this.onSignUp}>Sign Up</button>
-                                    {' '}
                                     <Link className="Login-link" to="/login"> Login </Link>
                                 </div>
-                                {' '}
-                                {!register ? <div>{registerError}</div> : <Redirect  to='/login' />}
-                                {' '}
-                            </div>{' '}
-                            {' '}
-                            {registerError && 
-                                (<div>
-                                    {registerError}
-                                </div>) 
-                            }
+                            </div>
                         </div>
                     </div>
                 );
