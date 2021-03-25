@@ -60,32 +60,31 @@
  ## Features:
 
     => Registration and Login 
-       ---
+---
         • User need to register themselves and then they can login into the system. 
         • Once user is logged in,user can use different features.
 
     => Messages section:   
-       ---
+---
        • Messages are send to cliend and recieved realtime.
 
     => Profile Section: 
-       ---
+---
         • Users information like username,bio,email,id,Friends Count.
     
     => Add Friends:
-       ---
+  ---
         • User can add friend. If user is friend of other user, then that user is displayed in Messages SECTION.
 
     => Search Bar: 
-       ---
+---
        • User can search for other users. 
 
     => Edit Profile :
-       ---
+---
        • User can change his/her username and update his/her bio.
    
  ## Functionality
- ---
     ❖ Registration
     ❖ Login
     ❖ Update your profile details 
@@ -142,7 +141,7 @@ ping
 - [@Pratik Zinjurde](https://github.com/pratikpz18) -  Ping
 
 ## Acknowledgments <a name = "acknowledgments"></a>
-- References
+- You can Reach me :-
 - [Instagram](https://www.instagram.com/?hl=en)
 - [LinkedIn](https://www.linkedin.com/in/pratik-zinjurde-2a10b71b1/)
 - [Twitter](https://www.twitter.com)
