@@ -143,7 +143,7 @@ ping
 ## Acknowledgments
 - [Instagram](https://www.instagram.com/?hl=en)
 - [LinkedIn](https://www.linkedin.com/in/pratik-zinjurde-2a10b71b1/)
-- [Twitter](https://www.twitter.com)
+- [Twitter](https://mobile.twitter.com/PratikZinjurde)
     
         
 
