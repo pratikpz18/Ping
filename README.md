@@ -1,13 +1,14 @@
-<h1 align="center"><b>Ping</b></h1>
+# <h1 align="center"><b>Ping</b></h1>
 <p align="center">A chatting website where user can connect with other users and chat with them
     <br> 
 </p>
 
-### Instruction 
-To run this 
+## Instruction :-
+##### To run this 
 #### npm install 
-then go to backend folder dir 
+##### then go to backend folder dir 
 ### npm run dev
+##### now visit http://localhost:3000/
 
 
 ## ⛏️ Built Using <a name = "tech_stack"></a>
@@ -22,7 +23,7 @@ then go to backend folder dir
 ## Screenshots <a name = "Screenshots"></a>
 
 -Landing
-<img src="Screenshots/Landing.png" alt="Landing Page"
+<img src="Screenshots/Landing.png" alt="Landing Page">
 - Login
 <img src="Screenshots/Login.png" alt="Login Page">
 - Signup
