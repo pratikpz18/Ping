@@ -395,7 +395,7 @@
   bottom: 25vh;
   height:74vh;
   width: 45vw;
-  left: 45vw;
+  left: 40vw;
   padding: 18px;
   box-shadow: 0px 0px 1px 1px gray,
   0px 1px 0px 1px gray;
@@ -421,7 +421,7 @@
   position: relative;
   padding: 8px;
   left: 2vw;
-  width: 36vw;
+  width: 26vw;
   bottom: 64vh;
   border-radius: 6px;
   box-shadow: 0 0 2px 1px var(--gray);
