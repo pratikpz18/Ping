@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../App.css' ;
 import { Link,Redirect } from 'react-router-dom';
 import UserService from "../services/userservice";
 
@@ -70,6 +71,9 @@ export default class EditProfile extends Component{
                 UpdateUser:updateuser,
                 update:true
             })
+            this.setState({
+                bio:this.state.UpdateUser.user.bio
+            })
         }catch(err){
             console.log(err)
         }
@@ -92,44 +96,44 @@ export default class EditProfile extends Component{
         }
         else{
             return(
-                <div>
-                    <div className="navbar navbar-inverse">
-                    <div className="container-fluid">
-                            <div className="navbar-header">
-                                <Link to="/dashboard" className="logo-link">Ping</Link>
+                <div className="editprofile">
+                    <div className="navbar profile-nav">
+                        <div className="navbar-nav profile-navbar-nav">
+                            <div className="navbar-item profile-navbar-item ">
+                                <Link to="/dashboard" className="logo-link Profile-logo-link ">Dashboard</Link>
                             </div>
-                            <div>
-                                <Link className="link" to="/login" onClick={this.logOut}><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</Link>
+                            <div className="navbar-item profile-navbar-item">
+                                <Link className="link" to="/login" onClick={this.logOut}><i class="fa fa-sign-out logout-btn" aria-hidden="true">LogOut</i></Link>
                             </div>
                         </div>
                     </div>
-                    <h1> Edit Profile</h1>
-                    <div className="form">
-                        <div className="input-group" >
-                            <label>Username:</label>
-                            <input 
-                            className="form-control"
-                            type="text"
-                            value={this.state.username}
-                            onChange={this.onTextboxChangeUsername}>
-                            </input>
+                    <div className="editprofile-container"> 
+                        <h1 className="header"> Edit Profile</h1>
+                        <div className="editprofile-body">
+                            <div className="input-group" >
+                                <label className="label">Username:</label>
+                                <input 
+                                className="form-control editprofile-input"
+                                type="text"
+                                value={this.state.username}
+                                onChange={this.onTextboxChangeUsername}>
+                                </input>
+                            </div>
+                            <div className="input-group" >
+                                <label className="label">Bio:</label>
+                                <input 
+                                className="form-control editprofile-input"
+                                type="text"
+                                value={this.state.bio}
+                                onChange={this.onTextboxChangeBio}
+                                ></input>
+                            </div>
+                            <div className="button-group">
+                                <button className="btn-danger cancel-btn"><Link className="cancel-link" to={`/dashboard/profile/:${currentUser._id}`}>Cancel</Link></button>
+                                <button className="btn-primary update-btn" onClick={this.updateuser}>Update</button>
+                            </div>
+                            {!update ? <div></div> : <Redirect  to={`/dashboard/profile/:${currentUser._id}`} />}
                         </div>
-                        <div className="input-group" >
-                            <label>Bio:</label>
-                            <input 
-                            className="form-control"
-                            type="text"
-                            value={this.state.bio}
-                            onChange={this.onTextboxChangeBio}
-                            ></input>
-                        </div>
-                        <div>
-                            <button className="btn-secondary"><Link className="link" to={`/dashboard/profile/:${currentUser._id}`}>Cancel</Link></button>
-                            <button className="btn-primary" onClick={this.updateuser}>Update</button>
-                        </div>
-                        {' '}
-                        {!update ? <div></div> : <Redirect  to={`/dashboard/profile/:${currentUser._id}`} />}
-                        {' '}
                     </div>
                 </div>
             );
