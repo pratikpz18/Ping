@@ -439,6 +439,11 @@
   align-items: center;
 }
 
+.suggestion-username{
+  color: var(--info);
+  font-size: 18px;
+}
+
 .text{
   margin-right: 10px;
 }
