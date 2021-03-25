@@ -60,31 +60,32 @@
  ## Features:
 
     => Registration and Login 
-       _____
+       ---
         • User need to register themselves and then they can login into the system. 
         • Once user is logged in,user can use different features.
 
     => Messages section:   
-       _____
+       ---
        • Messages are send to cliend and recieved realtime.
 
     => Profile Section: 
-       _____
+       ---
         • Users information like username,bio,email,id,Friends Count.
     
     => Add Friends:
-       ____
+       ---
         • User can add friend. If user is friend of other user, then that user is displayed in Messages SECTION.
 
     => Search Bar: 
-        _____
+       ---
        • User can search for other users. 
 
     => Edit Profile :
-       _____
+       ---
        • User can change his/her username and update his/her bio.
    
  ## Functionality
+ ---
     ❖ Registration
     ❖ Login
     ❖ Update your profile details 
