@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import '../App.css'
+import { Link } from 'react-router-dom';
 import { AddFreind, SearchUser } from '../services/SearchService';
 import UserService from "../services/userservice";
 import Modal from 'react-bootstrap/Modal';
@@ -70,13 +72,13 @@ async handleFreindRequest(elementid){
     console.log(data.fid,elementid)
     return
   }else{
-  const AddingFriendtoList = await AddFreind(data);
-  console.log(AddingFriendtoList);
-  const userdata = await UserService.getUser(curid);
-  console.log(userdata);
-  const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user.user.friendsList.push(fid));
-  localStorage.setItem('user', JSON.stringify(user));
+    const AddingFriendtoList = await AddFreind(data);
+    console.log(AddingFriendtoList);
+    const userdata = await UserService.getUser(curid);
+    console.log(userdata);
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user.user.friendsList.push(fid));
+    localStorage.setItem('user', JSON.stringify(user));
   }
 }
 
@@ -86,47 +88,48 @@ render() {
     const {currentUser} = this.props;
     return (
        <div>
-          <Modal show={this.state.show} onHide={this.handleClose} 
-          >
+          <Modal show={this.state.show} onHide={this.handleClose} dialogClassName="modal-container">
              <Modal.Header closeButton>
                <Modal.Title>
                  <input 
                   type="text" 
-                  placeholder="Search.."
+                  placeholder="Search..."
+                  className="form-control"
                   value={search}
                   onChange={this.onTextboxChangeSearch}
                  ></input>
                </Modal.Title>
              </Modal.Header>
-             <Modal.Body>
+             <Modal.Body >
                <h3>Users</h3>
                <div>
-                <ul className="collection">
+                <ul className="list-group">
                   {userdetails.map((element) => {
                     if(currentUser.user.username !== element.username){
                       if((JSON.parse(localStorage.getItem('user')).user.friendsList.some(item => item == element._id))){
                         return(
-                        <div key={element._id}>
-                          <li>{element.username}<input id={element._id} type="button" value="Added" style = {{backgroundColor:"yellow"}}></input></li>
+                        <div key={element._id} className="user-list">
+                          <li className="list-group-item"><Link to={`/dashboard/profile/:${element._id}`}>{element.username}</Link><input id={element._id} type="button" className="list-group-btn" value="Friends" style = {{backgroundColor:"#17a2b8"}}></input></li>
                         </div>
                         )
                       }else{
                         return(
-                          <div key={element._id}>
-                            <li>{element.username}{' '}<input 
+                          <div key={element._id} className="user-list">
+                            <li className="list-group-item"><Link to={`/dashboard/profile/:${element._id}`}>{element.username}</Link><input 
                             type="button" 
                             id={element._id} 
+                            className="list-group-btn"
                             onClick={this.handleFreindRequest.bind(this,element._id )} 
-                            value={this.state.requestedIds[element._id] ? 'Added' : 'Add Friend'}
-                            style = {{backgroundColor: ( element._id === this.state.active_id ?  'yellow' : "white")}}></input></li>
+                            value={this.state.requestedIds[element._id] ? 'Friends' : 'Add Friend'}
+                            style = {{backgroundColor: ( element._id === this.state.active_id ?  '#17a2b8' : "gray")}}></input></li>
                           </div>
                         );
                       }
                     }
                     else{
                       return(
-                        <div key={element._id}>
-                          <li>{element.username}</li>
+                        <div key={element._id} className="user-list">
+                          <li className="list-group-item"><Link to={`/dashboard/profile/:${element._id}`}>{element.username}</Link></li>
                         </div>
                       );
                     }
