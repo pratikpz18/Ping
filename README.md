@@ -1,3 +1,6 @@
+<p align="center">
+<img src="frontend/src/img/logo1.png" alt=" Project Logo" height="160px" >
+</p>
 # <h1 align="center"><b>Ping</b></h1>
 <p align="center">A chatting website where user can connect with other users and chat with them
     <br> 
