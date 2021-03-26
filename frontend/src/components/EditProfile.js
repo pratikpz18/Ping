@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css' ;
+import logo from '../img/logo1.png';
 import { Link,Redirect } from 'react-router-dom';
 import UserService from "../services/userservice";
 
@@ -100,6 +101,8 @@ export default class EditProfile extends Component{
                     <div className="navbar profile-nav">
                         <div className="navbar-nav profile-navbar-nav">
                             <div className="navbar-item profile-navbar-item ">
+                                <img src={logo} alt="logo"
+                                    style={{height:'38px',width:'38px'}}></img>
                                 <Link to="/dashboard" className="logo-link Profile-logo-link ">Dashboard</Link>
                             </div>
                             <div className="navbar-item profile-navbar-item">

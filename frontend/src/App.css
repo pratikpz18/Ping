@@ -279,7 +279,7 @@
   color: var(--white);
   font-size: 32px;
   font-weight: bolder;
-  padding:0px 30px;
+  padding:0px 10px;
 }
 
 .logo-link:hover{
@@ -375,7 +375,7 @@
 }
 
 .Profile-logo-link{
-  font-size: 24px;
+  font-size: 22px;
   color: rgba(139, 139, 139, 0.863);
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import logo from '../img/logo1.png';
 import { Link,Redirect } from 'react-router-dom';
 import UserService from "../services/userservice";
 
@@ -31,7 +32,12 @@ export default class Landing extends Component{
         else{
             return(
                 <div className="Landing">
-                    <h1><Link to="/" className="Landing-header">Ping</Link></h1>
+                    <h1>
+                        <Link to="/" className="Landing-header">
+                        <img src={logo} alt="logo"
+                                style={{height:'52px',width:'52px',marginBottom:'8px',paddingRight:'5px'}}></img>Ping
+                            </Link>
+                    </h1>
                     <div className="Main-Text col-sm-6">
                         <h3><strong>Our Team</strong>Welcomes You!</h3>
                         <div className="quote-div">

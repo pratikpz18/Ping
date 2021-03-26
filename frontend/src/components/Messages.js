@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import logo from '../img/logo1.png';
 import { Link,Redirect } from 'react-router-dom';
 import UserService from "../services/userservice";
 import {getUsersFriend} from "../services/messageservice";
@@ -104,6 +105,8 @@ export default class Messages extends Component {
                     <div className="navbar navbar-inverse">
                         <div className="container-fluid">
                             <div className="navbar-header">
+                                <img src={logo} alt="logo"
+                                style={{height:'45px',width:'45px',marginBottom:'8px'}}></img>
                                 <Link to="/dashboard" className="logo-link">Ping</Link>
                             </div>
                             <div>
