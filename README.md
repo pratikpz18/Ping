@@ -7,11 +7,11 @@
 </p>
 
 ## Instruction :-
-##### To run this 
-#### npm install 
-##### then go to backend folder dir 
-### npm run dev
-##### now visit http://localhost:3000/
+1.Clone the repository git clone https://github.com/pratikpz18/Ping.git
+2.Install dependecies npm install
+3.Change Directory cd backend
+4.Run the application npm run dev
+5.Open browser and type http://localhost:3000/
 
 
 ## ⛏️ Built Using <a name = "tech_stack"></a>
